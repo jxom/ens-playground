@@ -48,7 +48,7 @@ async function registerENS() {
         .join('');
 
     // Submit our commitment to the smart contract
-    const commitment = await controller.makeCommitment(ensName, owner, salt);
+    const commitment = await controller.makeCommitmentWithConfig(ensName, owner, salt, process.env.ENS_RESOLVER_CONTRACT_ADDRESS, owner);
     await controller.commit(commitment);
 
     // Add 10% to account for price fluctuation; the difference is refunded.
@@ -60,8 +60,7 @@ async function registerENS() {
     // Wait 60 seconds before registering
     setTimeout(async () => {
       // Submit our registration request
-      await controller.register(ensName, owner, duration, salt, { value: price.toString() });
-      // await controller.registerWithConfig(ensName, owner, duration, salt, ethResolverAddress, owner, { value: price.toString() });
+      await controller.registerWithConfig(ensName, owner, duration, salt, process.env.ENS_RESOLVER_CONTRACT_ADDRESS, owner, { value: price.toString() });
 
       console.log('your ENS is registered fren');
     }, 60000);
