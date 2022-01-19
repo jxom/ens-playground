@@ -34,7 +34,7 @@ async function registerENS() {
   const controllerAddress = await ethResolver.interfaceImplementer(ethNamespace, process.env.ENS_CONTROLLER_INTERFACE_ID);
   const controller = new Contract(controllerAddress, controllerAbi, wallet);
 
-  const ensName = name.replace('.eth', '');
+  const ensName = name.replace(/\.eth$/, '');
   const available = await controller.available(ensName);
 
   if (available) {
@@ -61,6 +61,8 @@ async function registerENS() {
     setTimeout(async () => {
       // Submit our registration request
       await controller.register(ensName, owner, duration, salt, { value: price.toString() });
+      // await controller.registerWithConfig(ensName, owner, duration, salt, ethResolverAddress, owner, { value: price.toString() });
+
       console.log('your ENS is registered fren');
     }, 60000);
   } else {
