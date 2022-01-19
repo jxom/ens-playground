@@ -1,0 +1,22 @@
+{
+  "name": "ens-test",
+  "version": "1.0.0",
+  "scripts": {
+    "ts-node": "node -r esbuild-register",
+    "register-ens": "yarn ts-node scripts/register-ens",
+    "register-ens2": "yarn ts-node scripts/register-ens2"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.14.11",
+    "esbuild-register": "^3.3.2",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@ensdomains/ensjs": "^2.0.1",
+    "dotenv": "^14.2.0",
+    "ethers": "^5.5.3",
+    "get-random-values": "^1.2.2"
+  }
+}
